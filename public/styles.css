@@ -45,7 +45,7 @@ img {
 
 .min-order-history,
 .min-cart {
-  height: 60vh;
+  min-height: 60vh;
   order: 1;
   width: 5vw;
   background-color: blue;
