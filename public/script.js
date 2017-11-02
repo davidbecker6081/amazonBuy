@@ -17,4 +17,8 @@ const getInventory = () => {
 		.then(parsedResponse => appendItems(parsedResponse));
 };
 
+$('.slide-order-btn').on('click', () => {
+  $('.order-history').toggleClass('isActive')
+})
+
 $(document).ready(getInventory);
