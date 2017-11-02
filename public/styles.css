@@ -2,6 +2,10 @@
   box-sizing: border-box;
 }
 
+h1 {
+  text-align: center;
+}
+
 main {
   display: flex;
   flex-wrap: wrap;
@@ -11,6 +15,13 @@ main {
   padding: 10px;
   border: 2px solid black;
   margin: 0 20px 20px 0;
+  width: 30%;
+}
+
+
+img {
+  height: 15vw;
+  width: 20vw;
 }
 
 .isActive {
