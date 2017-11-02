@@ -1,5 +1,10 @@
 * {
   box-sizing: border-box;
+  font-family: 'Merriweather Sans', sans-serif;
+}
+
+html {
+  height: 100%;
 }
 
 body {
@@ -10,10 +15,15 @@ h1 {
   text-align: center;
 }
 
+h3 {
+  font-size: 1.5vw;
+}
+
 button {
   background: none;
   border: 2px solid black;
   cursor: pointer;
+  font-family: 'Merriweather Sans', sans-serif;
   font-size: 2vw;
   outline-style: none;
 }
@@ -25,6 +35,10 @@ button {
 }
 
 .item-card {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-end;
   padding: 10px;
   border: 2px solid black;
   margin: 0 20px 20px 0;
@@ -34,6 +48,11 @@ button {
 img {
   height: 15vw;
   width: 20vw;
+}
+
+.add-cart-btn:hover {
+  background-color: black;
+  color: white;
 }
 
 .order-history-container {
@@ -66,7 +85,20 @@ img {
   padding: 15px;
   background-color: green;
   border: 2px solid black;
-  transition: 1s;
+  animation-name: slider;
+  animation-duration: 0.5s;
+}
+
+@keyframes slider {
+  0% {
+    opacity: 0;
+    width: 0;
+  }
+
+  100% {
+    opacity: 1;
+    width: 100%;
+  }
 }
 
 .cart-container {
