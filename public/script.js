@@ -6,7 +6,7 @@ const appendItems = items => {
         <p><strong>Description: </strong>${item.item_description}</p>
         <img src=${item.item_url} alt="bass guitar beauty">
         <p><strong>Price: </strong>$${item.price}.00</p>
-        <button data-id=${item.id} class="add-cart-btn">Add To Cart</button>
+        <button data-item=${item} class="add-cart-btn">Add To Cart</button>
       </article>`);
 	});
 };

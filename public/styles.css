@@ -65,6 +65,7 @@ img {
   padding: 15px;
   background-color: green;
   border: 2px solid black;
+  transition: 1s;
 }
 
 .cart-container {
@@ -79,12 +80,16 @@ img {
   order: 20;
 }
 
-.isActive {
-  display: block;
+.checkout-btn {
+  border: 2px solid black;
+  padding: 5px;
 }
 
-@keyframes slide-right {
-  0% {
+.checkout-btn:hover {
+  background-color: black;
+  color: green;
+}
 
-  }
+.isActive {
+  display: block;
 }
