@@ -1,0 +1,18 @@
+* {
+  box-sizing: border-box;
+}
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.item-card {
+  padding: 10px;
+  border: 2px solid black;
+  margin: 0 20px 20px 0;
+}
+
+.isActive {
+  display: block;
+}
