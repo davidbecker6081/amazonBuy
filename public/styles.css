@@ -59,6 +59,7 @@ button {
   margin: 0 20px 20px 0;
   width: 30%;
   background-color: #A0B0D4;
+  box-shadow: 0px 0px 5px 0px #263455;
 }
 
 img {
