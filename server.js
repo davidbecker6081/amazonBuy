@@ -7,6 +7,7 @@ const environment = process.env.NODE_ENV || 'development';
 const configuration = require('./knexfile')[environment];
 const db = require('knex')(configuration);
 
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -29,5 +30,37 @@ app.get('/api/v1/inventory', (request, response) => {
 		})
 		.catch(error => response.status(500).json({ error }));
 });
+
+
+app.get('/api/v1/order_history', (request, response) => {
+  return db('order_history')
+    .select()
+    .then(history => {
+      if (!history.length) {
+        return response.status(404).json({ error: 'No order history could be found.' });
+      } else {
+        return response.status(200).json(history);
+      }
+    })
+    .catch(error => response.status(500).json({ error }));
+})
+
+app.post('/api/v1/order_history', (request, response) => {
+  const order = request.body;
+  const requiredKeys = ['total'];
+
+  for (const requiredParameter of requiredKeys) {
+    if (!order[requiredParameter]) {
+      return response.status(422).send({
+        error: `Expected format: {'total': <decimal>}. You are missing a ${requiredParameter} property.`
+      });
+    };
+  };
+
+  return db('order_history')
+    .insert(order, '*')
+    .then(postedOrder => response.status(201).json(postedOrder))
+    .catch(error => response.status(500).json({ error }));
+})
 
 module.exports = app;
