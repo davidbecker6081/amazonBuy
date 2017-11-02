@@ -3,12 +3,58 @@
   <head>
     <meta charset="utf-8">
     <title>Amazon Bay</title>
+    <link rel="stylesheet" href="normalize.css">
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
 
   <h1>Amazon Bay</h1>
 
+  <main>
+    <section class="order-history-container">
+      <div class="min-order-history">
+        <button class="slide-order-btn">-</button>
+        <p class="slider-text">Order History</p>
+      </div>
+      <div class="order-history">
+        <h2>Order History</h2>
+        <article class="order-article">
+          <h4>Order #1</h4>
+          <p>Order Date: 10/1/02</p>
+          <p>Total Price: $25.00</p>
+        </article>
+        <article class="order-article">
+          <h4>Order #2</h4>
+          <p>Order Date: 9/1/04</p>
+          <p>Total Price: $100.00</p>
+        </article>
+      </div>
+    </section>
+    <section class="items-container">
+
+    </section>
+    <section class="cart-container">
+      <div class="min-cart">
+        <button class="slide-cart-btn">-</button>
+        <p class="slider-text">Cart</p>
+      </div>
+      <div class="cart">
+        <h2>Items</h2>
+        <article class="cart-article">
+          <h4>Thing 1</h4>
+          <p>Price: $1.00</p>
+        </article>
+        <article class="cart-article">
+          <h4>Thing 2</h4>
+          <p>Price: $5.00</p>
+        </article>
+        <p>Total: $6.00</p>
+        <button class="checkout-btn">Checkout/Purchase</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="jquery.js" charset="utf-8"></script>
   <script src="script.js" charset="utf-8"></script>
   </body>
 </html>
