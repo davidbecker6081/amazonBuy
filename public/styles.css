@@ -12,7 +12,7 @@ h1 {
 
 button {
   background: none;
-  border: none;
+  border: 2px solid black;
   cursor: pointer;
   font-size: 2vw;
   outline-style: none;
@@ -55,8 +55,9 @@ img {
 
 .slide-order-btn,
 .slide-cart-btn {
-  word-wrap: break-word;
   margin-bottom: 15vh;
+  border: none;
+  word-wrap: break-word;
 }
 
 .order-history,

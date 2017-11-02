@@ -1,3 +1,10 @@
+const addToLocalStorage = (item) => {
+  const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+  cartItems.push(item)
+  localStorage.setItem('cartItems', JSON.stringify(cartItems))
+}
+
 const appendItems = items => {
 	items.forEach(item => {
 		$('.items-container').append(
@@ -9,6 +16,15 @@ const appendItems = items => {
         <button data-name='${item.item}' data-price=${item.price} class="add-cart-btn">Add To Cart</button>
       </article>`);
 	});
+};
+
+const fetchLocalStorage = () => {
+  const itemsFromStorage = JSON.parse(localStorage.getItem('cartItems'));
+
+  itemsFromStorage.forEach(item => {
+    appendToCart(item.name, item.price)
+    updateTotalCartPrice()
+  })
 };
 
 const getInventory = () => {
@@ -30,23 +46,34 @@ const updateTotalCartPrice = () => {
   $('.cart-item-price').each((i, price) => {
     total += $(price).data('price')
   })
-  console.log(total);
   $('.cart-total').text(total)
 }
 
 $('.items-container').on('click', '.add-cart-btn', (e) => {
   const name = $(e.target).data('name');
-  const price = $(e.target).data('price')
+  const price = $(e.target).data('price');
+  const item = {
+    name,
+    price
+  };
   appendToCart(name, price)
   updateTotalCartPrice()
+  addToLocalStorage(item)
 })
 
-$('.slide-order-btn').on('click', () => {
+$('.slide-order-btn').on('click', (e) => {
+  const isActive = $('.order-history').hasClass('isActive');
+
   $('.order-history').toggleClass('isActive');
+  isActive ? $(e.target).text('+') : $(e.target).text('-')
 })
 
-$('.slide-cart-btn').on('click', () => {
+$('.slide-cart-btn').on('click', (e) => {
+  const isActive = $('.cart').hasClass('isActive');
+
   $('.cart').toggleClass('isActive');
+    isActive ? $(e.target).text('+') : $(e.target).text('-')
 })
 
 $(document).ready(getInventory);
+$(window).on('load', fetchLocalStorage)
