@@ -8,7 +8,6 @@ const db = require('knex')(configuration);
 
 chai.use(chaiHttp);
 
-
 describe('test', () => {
 	it('should run tests', () => {
 		let ran = true;
@@ -60,8 +59,8 @@ describe('API routes', () => {
 			});
 	});
 
-  describe('GET /api/v1/inventory', () => {
-    it('should fetch all items in inventory', done => {
+	describe('GET /api/v1/inventory', () => {
+		it('should fetch all items in inventory', done => {
 			chai
 				.request(server)
 				.get('/api/v1/inventory')
@@ -73,7 +72,7 @@ describe('API routes', () => {
 					response.body
 						.filter(item => item.item === 'Fodera Emperor Standard')
 						.length.should.equal(1);
-          response.body[0].should.have.property('id');
+					response.body[0].should.have.property('id');
 					response.body[0].id.should.be.a('number');
 					response.body[0].should.have.property('item');
 					response.body[0].item.should.be.a('string');
@@ -90,16 +89,51 @@ describe('API routes', () => {
 					done();
 				});
 		});
-  })
+	});
 
-  it('should return a 404 if no inventory was found', done => {
+	it('should return a 404 if no inventory was found', done => {
+		chai
+			.request(server)
+			.get('/api/v1/wrong')
+			.end((err, response) => {
+				response.should.have.status(404);
+				done();
+			});
+	});
+
+	describe('GET /api/v1/order_history', () => {
+		it('should fetch all of the order history', done => {
 			chai
 				.request(server)
-				.get('/api/v1/wrong')
+				.get('/api/v1/order_history')
 				.end((err, response) => {
-					response.should.have.status(404);
+					response.should.have.status(200);
+					response.should.be.json;
+					response.body.should.be.a('array');
+					response.body.length.should.equal(3);
+					response.body
+						.filter(order => order.total === 1000)
+						.length.should.equal(1);
+					response.body[0].should.have.property('id');
+					response.body[0].id.should.be.a('number');
+					response.body[0].should.have.property('total');
+          response.body[0].total.should.be.a('number');
+					response.body[0].should.have.property('created_at');
+					response.body[0].created_at.should.be.a('string');
+					response.body[0].should.have.property('updated_at');
+					response.body[0].updated_at.should.be.a('string');
 					done();
 				});
 		});
+	});
 
+	it('should return a 404 if no order history was found', done => {
+		chai
+			.request(server)
+			.get('/api/v1/wrong')
+			.end((err, response) => {
+				response.should.have.status(404);
+				done();
+			});
+	});
 });
