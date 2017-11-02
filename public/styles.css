@@ -91,6 +91,10 @@ img {
   color: green;
 }
 
+.checkout-btn:disabled {
+  color: red;
+}
+
 .isActive {
   display: block;
 }

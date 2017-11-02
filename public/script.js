@@ -21,10 +21,12 @@ const appendItems = items => {
 const fetchLocalStorage = () => {
   const itemsFromStorage = JSON.parse(localStorage.getItem('cartItems'));
 
-  itemsFromStorage.forEach(item => {
-    appendToCart(item.name, item.price)
-    updateTotalCartPrice()
-  })
+  if (itemsFromStorage) {
+    itemsFromStorage.forEach(item => {
+      appendToCart(item.name, item.price)
+      updateTotalCartPrice()
+    })
+  }
 };
 
 const getInventory = () => {
@@ -79,19 +81,27 @@ $('.slide-cart-btn').on('click', (e) => {
 })
 
 const postOrder = () => {
+  const total = { total: $('.cart-total').text() };
 
+  fetch('/api/v1/order_history', {
+    method: 'POST',
+    body: JSON.stringify(total),
+    headers: {
+      'Content-Type': 'application/json'
+      }
+    })
+  .then(response => response.json())
+  .then(parsedResponse => console.log(parsedResponse))
 }
 
 const toggleCheckoutBtn = () => {
-  const isCartEmpty = $('.cart-article-container');
+  const isCartFull = $('.cart-article').length;
   const checkoutBtn = $('.checkout-btn');
 
-  isCartEmpty ? checkoutBtn.attr('disabled', true) : checkoutBtn.attr('disabled', false)
+  isCartFull ? checkoutBtn.attr('disabled', false) : checkoutBtn.attr('disabled', true)
 }
 
-$('.checkout-btn').on('click', (e) => {
-
-})
+$('.checkout-btn').on('click', postOrder)
 
 $(document).ready(getInventory);
 $(window).on('load', () => {
