@@ -12,7 +12,7 @@ h1 {
 
 button {
   background: none;
-  border: none;
+  border: 2px solid black;
   cursor: pointer;
   font-size: 2vw;
   outline-style: none;
@@ -45,7 +45,7 @@ img {
 
 .min-order-history,
 .min-cart {
-  height: 60vh;
+  min-height: 60vh;
   order: 1;
   width: 5vw;
   background-color: blue;
@@ -55,8 +55,9 @@ img {
 
 .slide-order-btn,
 .slide-cart-btn {
-  word-wrap: break-word;
   margin-bottom: 15vh;
+  border: none;
+  word-wrap: break-word;
 }
 
 .order-history,
@@ -88,6 +89,10 @@ img {
 .checkout-btn:hover {
   background-color: black;
   color: green;
+}
+
+.checkout-btn:disabled {
+  color: red;
 }
 
 .isActive {
