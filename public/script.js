@@ -90,6 +90,13 @@ const postOrder = () => {
 		.then(parsedResponse => appendOrder(parsedResponse[0]));
 };
 
+const showOrder = () => {
+  $('.cart').removeClass('isActive');
+  $('.slide-cart-btn').text('+');
+  $('.order-history').addClass('isActive');
+  $('.slide-order-btn').text('-')
+}
+
 const toggleCheckoutBtn = () => {
 	const isCartFull = $('.cart-article').length;
 	const checkoutBtn = $('.checkout-btn');
@@ -127,7 +134,12 @@ $('.slide-cart-btn').on('click', e => {
 	isActive ? $(e.target).text('+') : $(e.target).text('-');
 });
 
-$('.checkout-btn').on('click', postOrder);
+$('.checkout-btn').on('click', () => {
+  postOrder()
+  $('.cart-article-container').empty();
+  updateTotalCartPrice();
+  showOrder()
+});
 
 $(document).ready(getInventory);
 $(window).on('load', () => {
