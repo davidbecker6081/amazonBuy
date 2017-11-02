@@ -6,7 +6,7 @@ h1 {
   text-align: center;
 }
 
-main {
+.items-container {
   display: flex;
   flex-wrap: wrap;
 }
@@ -17,7 +17,6 @@ main {
   margin: 0 20px 20px 0;
   width: 30%;
 }
-
 
 img {
   height: 15vw;
