@@ -43,6 +43,7 @@ const appendToCart = (name, price) => {
 
 const updateTotalCartPrice = () => {
   let total = 0;
+
   $('.cart-item-price').each((i, price) => {
     total += $(price).data('price')
   })
@@ -56,9 +57,11 @@ $('.items-container').on('click', '.add-cart-btn', (e) => {
     name,
     price
   };
+
   appendToCart(name, price)
   updateTotalCartPrice()
   addToLocalStorage(item)
+  toggleCheckoutBtn()
 })
 
 $('.slide-order-btn').on('click', (e) => {
@@ -75,5 +78,23 @@ $('.slide-cart-btn').on('click', (e) => {
     isActive ? $(e.target).text('+') : $(e.target).text('-')
 })
 
+const postOrder = () => {
+
+}
+
+const toggleCheckoutBtn = () => {
+  const isCartEmpty = $('.cart-article-container');
+  const checkoutBtn = $('.checkout-btn');
+
+  isCartEmpty ? checkoutBtn.attr('disabled', true) : checkoutBtn.attr('disabled', false)
+}
+
+$('.checkout-btn').on('click', (e) => {
+
+})
+
 $(document).ready(getInventory);
-$(window).on('load', fetchLocalStorage)
+$(window).on('load', () => {
+  fetchLocalStorage()
+  toggleCheckoutBtn()
+})
