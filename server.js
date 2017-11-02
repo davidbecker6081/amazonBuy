@@ -31,34 +31,6 @@ app.get('/api/v1/inventory', (request, response) => {
 		.catch(error => response.status(500).json({ error }));
 });
 
-app.post('/api/v1/inventory', (request, response) => {
-  const item = request.body;
-  console.log(item);
-  console.log(request.body);
-
-  const requiredKeys = ['item', 'price', 'item_description', 'item_url'];
-
-  for (const requiredParameter of requiredKeys) {
-    if (!item[requiredParameter]) {
-      return response.status(422).send({
-        error: `Expected format: {'item': <string>, 'price': <decimal>, 'item_description': <string>, 'item_url': <string>}. You are missing a ${requiredParameter} property.`
-      });
-    };
-  };
-
-  return db('inventory')
-    .insert(item, '*')
-    .then(postedItem => response.status(201).json(postedItem))
-    .catch(error => response.status(500).json({ error }));
-})
-
-app.delete('/api/v1/inventory/:id', (request, response) => {
-  const id = request.params;
-
-  db('inventory').where(id).del()
-    .then(length => length ? response.sendStatus(204) : response.status(404).send({ error: `No item to delete with id of ${id.id}`}))
-    .catch(error => response.status(500).json({error}));
-})
 
 app.get('/api/v1/order_history', (request, response) => {
   return db('order_history')
@@ -70,6 +42,24 @@ app.get('/api/v1/order_history', (request, response) => {
         return response.status(200).json(history);
       }
     })
+    .catch(error => response.status(500).json({ error }));
+})
+
+app.post('/api/v1/order_history', (request, response) => {
+  const order = request.body;
+  const requiredKeys = ['total'];
+
+  for (const requiredParameter of requiredKeys) {
+    if (!order[requiredParameter]) {
+      return response.status(422).send({
+        error: `Expected format: {'total': <decimal>}. You are missing a ${requiredParameter} property.`
+      });
+    };
+  };
+
+  return db('order_history')
+    .insert(order, '*')
+    .then(postedOrder => response.status(201).json(postedOrder))
     .catch(error => response.status(500).json({ error }));
 })
 
