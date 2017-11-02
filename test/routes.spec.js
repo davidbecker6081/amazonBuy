@@ -202,29 +202,5 @@ describe('API routes', () => {
 						});
 				});
 		});
-		//
-		// 	it('should return an error message if request body is missing required keys', done => {
-		// 		chai
-		// 			.request(server)
-		// 			.post('/api/v1/breweries')
-		// 			.set('Authorization', adminToken)
-		// 			.send({
-		// 				name: 'Tyler\'s Beer Kingdom',
-		// 				location: 'Port Charlotte',
-		// 				year: 1993,
-		// 				email: 'tyler@turing.io',
-		// 				appName: 'Awesome',
-		// 				token: adminToken.token,
-		// 				admin: adminToken.admin,
-		// 			})
-		// 			.end((error, response) => {
-		// 				response.should.have.status(400);
-		// 				response.should.be.json;
-		// 				response.body.error.should.equal(
-		// 					'Missing key: beerCount'
-		// 				);
-		// 				done();
-		// 			});
-		// 	});
 	});
 });
