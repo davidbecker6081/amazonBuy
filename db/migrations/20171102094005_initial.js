@@ -3,7 +3,7 @@ exports.up = function(knex, Promise) {
     knex.schema.createTable("inventory", table => {
       table.increments("id").primary();
       table.string("item");
-      table.decimal("price");
+      table.integer("price");
       table.string("item_description");
       table.string("item_url");
 
@@ -12,7 +12,7 @@ exports.up = function(knex, Promise) {
 
     knex.schema.createTable("order_history", table => {
       table.increments("id").primary();
-      table.decimal("total");
+      table.integer("total");
 
       table.timestamps(true, true);
     })
