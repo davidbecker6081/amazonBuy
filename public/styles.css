@@ -10,6 +10,7 @@ html {
 
 body {
   margin: 0;
+  background-color: rgba(214, 216, 227, 0.87);
 }
 
 h1 {
@@ -18,9 +19,20 @@ h1 {
   text-align: center;
 }
 
+h2 {
+  padding: 5px;
+  border-bottom: 1px solid #263455;
+  font-size: 2vw;
+}
+
 h3 {
   font-size: 1.5vw;
   text-align: center;
+}
+
+h4 {
+  margin: 5px 0;
+  font-size: 1.2vw;
 }
 
 button {
@@ -82,6 +94,7 @@ img {
   margin-bottom: 15vh;
   border: none;
   color: #A0B0D4;
+  font-size: 4vw;
   word-wrap: break-word;
 }
 
@@ -111,6 +124,21 @@ img {
   }
 }
 
+.order-article,
+.cart-article {
+  margin-bottom: 10px;
+  padding: 5px;
+  background-color: rgba(254, 255, 255, 0.13);
+}
+
+.order-article p {
+  font-size: 1vw;
+}
+
+.cart-total-p {
+  font-size: 1.5vw;
+}
+
 .cart-container {
   display: flex;
   float: right;
@@ -124,18 +152,27 @@ img {
   order: 20;
 }
 
+.cart-item-price {
+  font-size: 1vw;
+}
+
 .checkout-btn {
-  border: 2px solid black;
+  border: 2px solid #263455;
   padding: 5px;
 }
 
 .checkout-btn:hover {
-  background-color: black;
-  color: green;
+  background-color: #263455;
+  color: #A0B0D4;
 }
 
 .checkout-btn:disabled {
-  color: red;
+  color: #DB938D;
+}
+
+.checkout-btn:disabled:hover {
+  background-color: #A0B0D4;
+  color: #DB938D;
 }
 
 .isActive {
