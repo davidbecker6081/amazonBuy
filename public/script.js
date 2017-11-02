@@ -18,7 +18,11 @@ const getInventory = () => {
 };
 
 $('.slide-order-btn').on('click', () => {
-  $('.order-history').toggleClass('isActive')
+  $('.order-history').toggleClass('isActive');
+})
+
+$('.slide-cart-btn').on('click', () => {
+  $('.cart').toggleClass('isActive');
 })
 
 $(document).ready(getInventory);

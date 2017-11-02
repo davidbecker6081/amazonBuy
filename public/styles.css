@@ -43,7 +43,8 @@ img {
   z-index: 10;
 }
 
-.min-order-history {
+.min-order-history,
+.min-cart {
   height: 60vh;
   order: 1;
   width: 5vw;
@@ -52,16 +53,30 @@ img {
   text-align: center;
 }
 
-.slide-order-btn {
+.slide-order-btn,
+.slide-cart-btn {
   word-wrap: break-word;
   margin-bottom: 15vh;
 }
 
-.order-history {
+.order-history,
+.cart {
   display: none;
   padding: 15px;
   background-color: green;
   border: 2px solid black;
+}
+
+.cart-container {
+  display: flex;
+  float: right;
+  position: relative;
+  bottom: 88vh;
+  z-index: 10;
+}
+
+.cart {
+  order: 20;
 }
 
 .isActive {
