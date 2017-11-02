@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  color: #263455;
   font-family: 'Merriweather Sans', sans-serif;
 }
 
@@ -12,16 +13,19 @@ body {
 }
 
 h1 {
+  margin-top: 0;
+  font-size: 3vw;
   text-align: center;
 }
 
 h3 {
   font-size: 1.5vw;
+  text-align: center;
 }
 
 button {
   background: none;
-  border: 2px solid black;
+  border: 2px solid #263455;
   cursor: pointer;
   font-family: 'Merriweather Sans', sans-serif;
   font-size: 2vw;
@@ -40,9 +44,9 @@ button {
   flex-direction: column;
   justify-content: flex-end;
   padding: 10px;
-  border: 2px solid black;
   margin: 0 20px 20px 0;
   width: 30%;
+  background-color: #A0B0D4;
 }
 
 img {
@@ -51,8 +55,8 @@ img {
 }
 
 .add-cart-btn:hover {
-  background-color: black;
-  color: white;
+  background-color: #263455;
+  color: #A0B0D4;
 }
 
 .order-history-container {
@@ -60,6 +64,7 @@ img {
   position: absolute;
   top: 20vh;
   z-index: 10;
+  border: 1px solid #263455;
 }
 
 .min-order-history,
@@ -67,24 +72,29 @@ img {
   min-height: 60vh;
   order: 1;
   width: 5vw;
-  background-color: blue;
-  border: 2px solid black;
+  background-color: #263455;
   text-align: center;
+  word-wrap: break-word;
 }
 
 .slide-order-btn,
 .slide-cart-btn {
   margin-bottom: 15vh;
   border: none;
+  color: #A0B0D4;
   word-wrap: break-word;
+}
+
+.slider-text {
+  color: #A0B0D4;
 }
 
 .order-history,
 .cart {
   display: none;
   padding: 15px;
-  background-color: green;
-  border: 2px solid black;
+  background-color: #A0B0D4;
+  color: #263455;
   animation-name: slider;
   animation-duration: 0.5s;
 }
@@ -105,7 +115,8 @@ img {
   display: flex;
   float: right;
   position: relative;
-  bottom: 88vh;
+  border: 1px solid #263455;
+  bottom: 100vh;
   z-index: 10;
 }
 
