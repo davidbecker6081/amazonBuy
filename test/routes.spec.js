@@ -16,6 +16,30 @@ describe('test', () => {
 	});
 });
 
+describe('Client Routes', () => {
+	it('should return the homepage with text', done => {
+		chai
+			.request(server)
+			.get('/')
+			.end((error, response) => {
+				response.should.have.status(200);
+				response.should.be.html;
+				response.res.text.should.include('Amazon Bay');
+				done();
+			});
+	});
+
+	it("should return a 404 error if the path doesn't exist", done => {
+		chai
+			.request(server)
+			.get('/wrong')
+			.end((error, response) => {
+				response.should.have.status(404);
+				done();
+			});
+	});
+});
+
 describe('API routes', () => {
 	beforeEach(done => {
 		db.migrate
@@ -54,7 +78,7 @@ describe('API routes', () => {
 					response.body[0].should.have.property('item');
 					response.body[0].item.should.be.a('string');
 					response.body[0].should.have.property('price');
-					response.body[0].price.should.be.a('integer');
+					response.body[0].price.should.be.a('number');
 					response.body[0].should.have.property('item_description');
 					response.body[0].item_description.should.be.a('string');
 					response.body[0].should.have.property('item_url');
@@ -67,4 +91,15 @@ describe('API routes', () => {
 				});
 		});
   })
+
+  it('should return a 404 if no inventory was found', done => {
+			chai
+				.request(server)
+				.get('/api/v1/wrong')
+				.end((err, response) => {
+					response.should.have.status(404);
+					done();
+				});
+		});
+
 });
