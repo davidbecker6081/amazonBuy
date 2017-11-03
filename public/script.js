@@ -19,41 +19,6 @@ const appendItems = items => {
 	});
 };
 
-const fetchLocalStorage = () => {
-	const itemsFromStorage = JSON.parse(localStorage.getItem('cartItems'));
-
-	if (itemsFromStorage) {
-		itemsFromStorage.forEach(item => {
-			appendToCart(item.name, item.price);
-			updateTotalCartPrice();
-		});
-	}
-};
-
-const getInventory = () => {
-	fetch('/api/v1/inventory')
-		.then(response => response.json())
-		.then(parsedResponse => appendItems(parsedResponse));
-};
-
-const appendToCart = (name, price) => {
-	$('.cart-article-container').append(
-		`<article class="cart-article">
-      <h4>${name}</h4>
-      <p data-price=${price} class="cart-item-price">Price: $${price}.00</p>
-    </article>`,
-	);
-};
-
-const updateTotalCartPrice = () => {
-	let total = 0;
-
-	$('.cart-item-price').each((i, price) => {
-		total += $(price).data('price');
-	});
-	$('.cart-total').text(total);
-};
-
 const appendOrder = order => {
 	const orderNumber = $('.order-article').length + 1;
 
@@ -66,6 +31,26 @@ const appendOrder = order => {
 	);
 };
 
+const appendToCart = (name, price) => {
+	$('.cart-article-container').append(
+		`<article class="cart-article">
+      <h4>${name}</h4>
+      <p data-price=${price} class="cart-item-price">Price: $${price}.00</p>
+    </article>`,
+	);
+};
+
+const fetchLocalStorage = () => {
+	const itemsFromStorage = JSON.parse(localStorage.getItem('cartItems'));
+
+	if (itemsFromStorage) {
+		itemsFromStorage.forEach(item => {
+			appendToCart(item.name, item.price);
+			updateTotalCartPrice();
+		});
+	}
+};
+
 const fetchOrders = () => {
 	fetch('/api/v1/order_history')
 		.then(response => response.json())
@@ -74,6 +59,12 @@ const fetchOrders = () => {
 				appendOrder(order);
 			});
 		});
+};
+
+const getInventory = () => {
+	fetch('/api/v1/inventory')
+		.then(response => response.json())
+		.then(parsedResponse => appendItems(parsedResponse));
 };
 
 const postOrder = () => {
@@ -106,6 +97,22 @@ const toggleCheckoutBtn = () => {
 		: checkoutBtn.attr('disabled', true);
 };
 
+const updateTotalCartPrice = () => {
+	let total = 0;
+
+	$('.cart-item-price').each((i, price) => {
+		total += $(price).data('price');
+	});
+	$('.cart-total').text(total);
+};
+
+$('.checkout-btn').on('click', () => {
+  postOrder()
+  $('.cart-article-container').empty();
+  updateTotalCartPrice();
+  showOrder()
+});
+
 $('.items-container').on('click', '.add-cart-btn', e => {
 	const name = $(e.target).data('name');
 	const price = $(e.target).data('price');
@@ -120,6 +127,13 @@ $('.items-container').on('click', '.add-cart-btn', e => {
 	toggleCheckoutBtn();
 });
 
+$('.slide-cart-btn').on('click', e => {
+  const isActive = $('.cart').hasClass('isActive');
+
+  $('.cart').toggleClass('isActive');
+  isActive ? $(e.target).text('+') : $(e.target).text('-');
+});
+
 $('.slide-order-btn').on('click', e => {
 	const isActive = $('.order-history').hasClass('isActive');
 
@@ -127,21 +141,8 @@ $('.slide-order-btn').on('click', e => {
 	isActive ? $(e.target).text('+') : $(e.target).text('-');
 });
 
-$('.slide-cart-btn').on('click', e => {
-	const isActive = $('.cart').hasClass('isActive');
-
-	$('.cart').toggleClass('isActive');
-	isActive ? $(e.target).text('+') : $(e.target).text('-');
-});
-
-$('.checkout-btn').on('click', () => {
-  postOrder()
-  $('.cart-article-container').empty();
-  updateTotalCartPrice();
-  showOrder()
-});
-
 $(document).ready(getInventory);
+
 $(window).on('load', () => {
 	fetchLocalStorage();
   fetchOrders();
