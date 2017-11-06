@@ -111,6 +111,7 @@ $('.checkout-btn').on('click', () => {
   $('.cart-article-container').empty();
   updateTotalCartPrice();
   showOrder()
+	localStorage.clear()
 });
 
 $('.items-container').on('click', '.add-cart-btn', e => {
